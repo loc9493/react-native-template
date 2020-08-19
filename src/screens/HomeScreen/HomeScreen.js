@@ -3,12 +3,12 @@ import { StyleSheet, ScrollView, View, Switch } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getTrendingRepo } from '../../store/actions';
-import { Text, Button } from '../../common';
+import { Text, Button, HeaderButtons } from '../../common';
 import { NAVIGATION_TO_DETAIL_SCREEN } from '../../navigation';
 import { Status } from '../../api';
 import { translate } from '../../i18n';
 import { ThemeContext, lightTheme, darkTheme } from '../../theme';
-
+import { HeaderButton } from 'react-navigation-header-buttons';
 const HomeScreen = ({
   /**
    * Tells about the status of get trendending repo api call
@@ -50,6 +50,18 @@ const HomeScreen = ({
   useEffect(() => {
     // componentDidMount
     _getTrendingRepo();
+    navigation.setOptions({title:'Contacts Pro'})
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons>
+              <HeaderButtons.Item
+                title={translate('common.drawerButton')}
+                iconName="menu"
+                onPress={navigation.openDrawer}
+              />
+            </HeaderButtons>
+      ),
+    });
   }, []);
 
   const toggleSwitch = state => {
@@ -68,7 +80,7 @@ const HomeScreen = ({
         />
 
         <Button title={translate('homeScreen.detailButton')} onPress={() => navigation.navigate(NAVIGATION_TO_DETAIL_SCREEN)} />
-
+        <Button title={'Change title'} onPress={() => navigation.setOptions({title:'Best'})} />
         <Text>{`${translate('homeScreen.apiCallStatus')} : ${status}`}</Text>
         {errorMessage !== '' && (<Text>{errorMessage}</Text>)}
         <Text>{JSON.stringify(items)}</Text>
