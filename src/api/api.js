@@ -1,4 +1,5 @@
 import Request from './Request';
+import Contacts from 'react-native-contacts';
 
 /**
  * Class that exposes REST API endpoints
@@ -19,6 +20,17 @@ class Api {
     };
 
     return this.request.get('/search/repositories', params, undefined);
+  }
+
+  getAllContacts() {
+    return new Promise((resolve, reject) => {
+      Contacts.getAll((err, contacts) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(contacts)
+      })
+    })
   }
 }
 

@@ -2,6 +2,7 @@ import {
   TRENDING_REPO_LOADING,
   TRENDING_REPO_SUCCESS,
   TRENDING_REPO_ERROR,
+  CONTACTS_REPO_SUCCESS,
 } from './homeActions';
 import { Status } from '../../api';
 
@@ -18,6 +19,12 @@ export default (state = initialState, { type, payload }) => {
         status: Status.LOADING,
       };
     case TRENDING_REPO_SUCCESS:
+      return {
+        ...state,
+        status: Status.SUCCESS,
+        items: payload.items,
+      };
+    case CONTACTS_REPO_SUCCESS:
       return {
         ...state,
         status: Status.SUCCESS,

@@ -1,7 +1,7 @@
 /**
  * Set this to false, to stop API logging
  */
-const SHOW_LOG = true;
+const SHOW_LOG = false;
 
 export default class Logger {
   static describeRequest(request = {}) {
